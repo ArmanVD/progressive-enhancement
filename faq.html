@@ -1,42 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Veelgestelde vragen / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Veelgestelde vragen / Progressive Enhancement / FDND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+    <link href="assets/styles.css" rel="stylesheet" />
+    <style>
+      .faq {
+        max-width: 800px;
+        margin-inline-start: 2em;
+        margin-block-start: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+      details {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
 
-			/* Hint: Denk aan de states van het component; deze kan open en dicht zijn */
-		</style>
-	</head>
-	<body>
-		<h1>Veelgestelde vragen</h1>
+      details:nth-of-type(1)[open] {
+        background-color: #a475f3;
+      }
 
+      details:nth-of-type(2)[open] {
+        background-color: #64e4be;
+      }
 
-		<!-- Content (waar nog wat HTML omheen moet 😄):
-		Wat is frontend development?
-		Een frontend developer ontwerpt en bouwt websites in HTML, CSS en JavaScript. Deze frontend talen leer je bij ons, je hebt dus geen voorkennis nodig.
+      details:nth-of-type(3)[open] {
+        background-color: #fdfc85;
+      }
 
-		Moet ik al kunnen coderen?
-		Nee, je hebt helemaal geen voorkennis nodig om te beginnen aan deze opleiding, we kunnen je alles leren! Als je wel al voorkennis hebt, is dat alleen maar goed, dan kunnen we je helpen je skills te verbeteren en te verdiepen in de stof.
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+      }
 
-		Wat is een Associate Degree?
-		Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5. Een Ad slaat een brug tussen het mbo-4 (niveau 4) en een hbo-bachelor (niveau 6). Met een Associate degree kies je voor een praktijkgerichte hbo-opleiding; je wordt opgeleid voor een beroep dat aansluit bij de praktijk. In dit geval word je opgeleid tot ‘frontend designer/developer' of kortweg ‘frontender’. Frontenders ontwerpen en maken interactieve, toegankelijke toepassingen voor het web. Frontenders werken binnen het gebied van software development, interactieontwerp en digitaal visueel ontwerp.
-		Na afronding van deze tweejarige hbo-opleiding, krijg je een wettelijk erkend hbo-diploma met de graad Associate degree. Met dit Ad-diploma kun je direct aan de slag in het werkveld of doorstromen naar de bacheloropleiding Communication and Multimedia Design (CMD).
-		-->
+      summary::-webkit-details-marker {
+        display: none;
+      }
 
+      .icon {
+        width: 1rem;
+        height: 1rem;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
 
-		<!-- Hint: Dit stukje HTML geeft het misschien al weg :) -->
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/faq.mp4" width="765" height="769" controls muted autoplay loop>
-				<a href="assets/faq.mp4">assets/faq.mp4</a>
-			</video>
-		</details>
-	</body>
+      .icon::before,
+      .icon::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #333;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+      }
+
+      .icon::after {
+        transform: translateY(-50%) rotate(90deg);
+      }
+
+      details[open] .icon::after {
+        transform: translateY(-50%) rotate(0deg);
+      }
+
+      details[open] .icon::before {
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      details[open] .icon::after {
+        transform: translateY(-50%) rotate(-45deg);
+      }
+
+      details p {
+        margin: 1rem 0 0 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Veelgestelde vragen</h1>
+
+    <section class="faq">
+      <details>
+        <summary>
+          <span class="icon"></span>
+          Wat is frontend development?
+        </summary>
+        <p>
+          Een frontend developer ontwerpt en bouwt websites in HTML, CSS en JavaScript. Deze frontend talen leer je bij ons, je hebt dus geen
+          voorkennis nodig.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          <span class="icon"></span>
+          Moet ik al kunnen coderen?
+        </summary>
+        <p>
+          Nee, je hebt helemaal geen voorkennis nodig om te beginnen aan deze opleiding, we kunnen je alles leren! Als je wel al voorkennis hebt, is
+          dat alleen maar goed, dan kunnen we je helpen je skills te verbeteren en te verdiepen in de stof.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          <span class="icon"></span>
+          Wat is een Associate Degree?
+        </summary>
+        <p>
+          Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5. Een Ad slaat een brug tussen het mbo-4 (niveau 4) en een
+          hbo-bachelor (niveau 6). Met een Associate degree kies je voor een praktijkgerichte hbo-opleiding; je wordt opgeleid voor een beroep dat
+          aansluit bij de praktijk.
+        </p>
+        <p>
+          Na afronding van deze tweejarige hbo-opleiding, krijg je een wettelijk erkend hbo-diploma met de graad Associate degree. Hiermee kun je
+          direct aan de slag of doorstromen naar de bacheloropleiding CMD.
+        </p>
+      </details>
+    </section>
+  </body>
 </html>
