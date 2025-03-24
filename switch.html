@@ -1,30 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Switch control / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Switch control / Progressive Enhancement / FDND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+    <link href="assets/styles.css" rel="stylesheet" />
+    <style>
+      .switch-control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+      }
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+      .switch-input {
+        position: absolute;
+        opacity: 0;
+      }
 
-			/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
-		</style>
-	</head>
-	<body>
-		<h1>Switch control</h1>
-		
-		<!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
-		     Wat gebeurt er in browsers die dat nog niet ondersteunen? -->
+      @supports (appearance: switch) or (-webkit-appearance: switch) {
+        .switch-input {
+          position: static;
+          opacity: 1;
+          appearance: switch;
+          -webkit-appearance: switch;
+          margin-right: 1rem;
+        }
 
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/switch.mp4" width="119" height="67" controls muted autoplay loop>
-				<a href="assets/switch.mp4">assets/switch.mp4</a>
-			</video>
-		</details>
-	</body>
+        .switch-label {
+          display: none;
+        }
+      }
+
+      @supports not (appearance: switch) {
+        .switch-label {
+          position: relative;
+          display: inline-block;
+          width: 120px;
+          height: 68px;
+          background-color: #ccc;
+          border-radius: 68px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        .switch-thumb {
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          width: 56px;
+          height: 56px;
+          background-color: white;
+          border-radius: 50%;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 0.9rem;
+          color: transparent;
+        }
+
+        .switch-input:checked + .switch-label {
+          background-color: #7ce3c3;
+        }
+
+        .switch-input:checked + .switch-label .switch-thumb {
+          transform: translateX(53px);
+          color: black;
+        }
+
+        .switch-input:checked + .switch-label .switch-thumb::after {
+          content: "aan";
+        }
+
+        .switch-thumb::after {
+          content: "";
+          transition: opacity 0.3s ease;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Switch control</h1>
+
+    <div class="switch-control">
+      <input type="checkbox" id="switch" class="switch-input" />
+      <label for="switch" class="switch-label">
+        <span class="switch-thumb"></span>
+      </label>
+    </div>
+
+    <details open>
+      <summary>Demo video</summary>
+      <video src="assets/switch.mp4" width="119" height="67" controls muted>
+        <a href="assets/switch.mp4">assets/switch.mp4</a>
+      </video>
+    </details>
+  </body>
 </html>
